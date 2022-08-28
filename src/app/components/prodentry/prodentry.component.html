@@ -1,32 +1,36 @@
-<form [formGroup]="entryForm" class="form-horizontal" id="entryForm" (ngSubmit)="saveEntry()">
+<form [formGroup]="entryForm" class="form-row" id="entryForm" (ngSubmit)="saveEntry()">
     <table class="product-table table">
         <tbody>
             <tr [ngClass]="editMode ? 'entry-edit':'entry-read'">
                 <td> <input type="text" formControlName="code" form="entryForm" /></td>
                 <td> <input type="text" formControlName="name" form="entryForm" /></td>
                 <td>
-                    <div class="input-currency" [ngClass]="{'hasError':(this.entryForm.get('baseprice')?.invalid)}">&#8364;</div>
+                    <div class="input-currency" [ngClass]="{'hasError':(this.entryForm.get('baseprice')?.invalid)}">
+                        &#8364;</div>
                     <input type='number' formControlName="baseprice" form="entryForm" />
 
                 </td>
 
-                <td> 
-                    <input class="input-haspercent"  type="number" formControlName="tax" form="entryForm" /> <div class="input-percent" [ngClass]="{'hasError':(this.entryForm.get('tax')?.invalid)}">&#37;</div></td>
-                
-                <td> 
-                    
-                     <input class="input-total text-right" [disabled]="true" type="text" value="{{(this.entryForm.get('baseprice')?.value * ((100+this.entryForm.get('tax')?.value)/100)) |
-                     currency:'EUR'}}">
-                     </td>
                 <td>
+                    <input class="input-haspercent" type="number" formControlName="tax" form="entryForm" />
+                    <div class="input-percent" [ngClass]="{'hasError':(this.entryForm.get('tax')?.invalid)}">&#37;</div>
+                </td>
 
-                    <button type="button" *ngIf="!editMode" class="btn btn-action btn-link" (click)="editEntry()"><i
+                <td>
+                    <input class="input-total text-right" [disabled]="true" type="text" value="{{(this.entryForm.get('baseprice')?.value * ((100+this.entryForm.get('tax')?.value)/100)) |
+                     currency:'EUR'}}">
+                </td>
+                <td *ngIf="!billMode">
+
+                    <button type="button" *ngIf="!editMode" class="btn btn-action btn-primary" (click)="editEntry()"><i
                             class="icon icon-edit"></i></button>
-                    <button type="button" *ngIf="!editMode" class="btn btn-action btn-link" (click)="deleteEntry()"><i
+                    <button type="button" *ngIf="!editMode" class="btn btn-action btn-error" (click)="deleteEntry()"><i
                             class="icon icon-delete"></i></button>
-                    <button type="submit" [disabled]="this.entryForm.invalid" *ngIf="editMode" class="btn btn-action btn-primary" ><i
-                            class="icon icon-check"></i></button>
-                    <button type="button" *ngIf="editMode" class="btn btn-action" (click)="cancelEdit()"><i
+                    <button type="submit" (click)="saveEntry()" [disabled]="this.entryForm.invalid" *ngIf="editMode"
+                        class="btn btn-action btn-success"><i class="icon icon-check"></i></button>
+                    <button type="button" *ngIf="editMode && !entry.transient" class="btn btn-action" (click)="cancelEdit()"><i
+                            class="icon icon-refresh flip-h"></i></button>
+                    <button type="button" *ngIf="editMode && entry.transient" class="btn btn-action" (click)="deleteEntry()"><i
                             class="icon icon-cross"></i></button>
                 </td>
             </tr>

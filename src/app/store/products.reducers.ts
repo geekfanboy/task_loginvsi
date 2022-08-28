@@ -17,7 +17,7 @@ export interface State {
 export const initialState: State = {
     products: [],
     //basetotal: 0,
-   // total: 0
+    // total: 0
 }
 
 const _productReducer = createReducer(
@@ -31,19 +31,18 @@ const _productReducer = createReducer(
         //    (obj, i) => obj.id === product.id ? { product }: obj);
         //console.log(newProds);
 
-        let newProd =  state.products.map(
+        let newProd = state.products.map(
             (content) => {
-                if(content.id === product.id){
+                if (content.id === product.id) {
                     return product;
-                }else{
+                } else {
                     return content;
-                } 
-        });        
+                }
+            });
 
-        return {...state, products: newProd}
-        
-    }
-    ),
+        return { ...state, products: newProd }
+
+    }),
 
     on(ProdActions.deleteProduct, (state, { id }) => {
 
@@ -56,26 +55,21 @@ const _productReducer = createReducer(
         console.log(newProds);
 
         return { ...state, products: newProds }
-    }
-    )
+    }),
 
+    on(ProdActions.clearTransients, (state) => {
 
-    //  state.products.map(
-    //       (content, i) => content.id === product.id ? { product }
-    //      : content
-    //)
-    // const index = state.products.map(object => object.id).indexOf('product.id');
+        console.log(state.products);
 
-    //return { ...state, products: [] }
-    /*   return {
-           products: state.products.map((prod) => {
-               prod.id == product.id ? product : prod
-           })
-       }
-   */
+        const newProds = state.products.filter((obj) => {
+            return !obj.transient;
+        });
 
-    //}
-    //)
+        console.log(newProds);
+
+        return { ...state, products: newProds }
+    })
+
 
 
 )

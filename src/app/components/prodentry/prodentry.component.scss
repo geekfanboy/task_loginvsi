@@ -4,13 +4,20 @@
         background: transparent;
         width:100%;
     }
+   
 }
+
 
 .entry-edit{
     input{
         width:100%;
     }
 }
+
+.form-row:hover{
+    background-color: #EEE;
+}
+   
 
 .input-total{
     font-weight: bolder;

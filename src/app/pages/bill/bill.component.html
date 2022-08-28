@@ -1,1 +1,49 @@
-<p>bill works!</p>
+<div class="container">
+    <div class="hero-title p-sticky">
+        
+            <div >
+                <h1>Saved Products</h1>
+                <p>Showing list of Saved Products</p>
+
+            </div>
+        
+        
+    </div>
+    
+
+
+    <div class="columns">
+        <div class="column col-12">
+
+            <table class="table product-table">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Base Price</th>
+                        <th>Tax</th>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+            </table>
+
+            <app-prodentry *ngFor="let prod of products$ | async" [entry]="prod" [billMode]="true"></app-prodentry>
+
+            <div class="my-2">
+             
+                <div  class="float-right text-right p-sticky summary-box">
+                    <div>
+                        
+                        <p><strong>Subtotals (w/o taxes) = {{(totalbase$ | async) | currency : 'EUR'}} <br> Total Including tax = {{totaltaxed$ | async | currency: 'EUR'}}</strong></p>
+                    </div>
+                    <button type="button" class="btn btn-error float-right  btn-lg" [routerLink]="['/products']"><i class="icon icon-arrow-left"></i> Back to Editing
+
+                        
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

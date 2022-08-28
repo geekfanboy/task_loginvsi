@@ -6,6 +6,7 @@ export enum ProductActionTypes {
     PRD_ADD = "[Products] Add Item",
     PRD_DEL = "[Products] Delete Item",
     PRD_SAV = "[Products] Save Item",
+    PRD_CLR = "[Products] Clear Transients"
 }
 
 export const addProduct = createAction(
@@ -24,15 +25,7 @@ export const deleteProduct = createAction(
     props<{ id:string }>()
 );
 
-/*
-export const deleteProduct = createAction(
-    ProductActionTypes.PRD_DEL,
-    props<{ product:Product }>()
+export const clearTransients = createAction(
+    ProductActionTypes.PRD_CLR
 );
 
-
-export const editProduct = createAction(
-    ProductActionTypes.PRD_EDIT,
-    props<{ product:Product }>()
-)
-*/

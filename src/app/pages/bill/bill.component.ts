@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { map, Observable } from 'rxjs';
+import { Product } from './../../models/products.models';
+import * as fromProd from './../../store/products.reducers';
 
 @Component({
   selector: 'app-bill',
@@ -7,9 +11,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BillComponent implements OnInit {
 
-  constructor() { }
+
+   products$!: Observable<Product[]>;       //current products saved in list.
+  totalbase$!: Observable<number>;
+  totaltaxed$!: Observable<number>;
+
+  
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
+    this.products$ = this.store.select(fromProd.selectProducts);    
+    this.totalbase$ = this.products$.pipe( map(prod=> prod.reduce((total,item)=>total + item.baseprice,0)));
+    this.totaltaxed$ = this.products$.pipe( map(prod=> prod.reduce((total,item)=>total + item.totalprice,0)));
   }
 
 }

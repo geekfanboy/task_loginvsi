@@ -15,8 +15,8 @@ export class ProdentryComponent implements OnInit {
   constructor(private fb: FormBuilder, private store: Store, private currencyPipe: CurrencyPipe) { }
 
   @Input() entry: Product = INITPROD;
-  @Input() editMode: boolean = false;
-  @Input() isNew = false;
+  editMode: boolean = false;
+  @Input() billMode = false;
 
   entryForm: FormGroup = this.fb.group({
     code: ['xx', Validators.required],

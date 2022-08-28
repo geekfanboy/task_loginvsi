@@ -101,3 +101,18 @@ input.ng-invalid{
 [hidden]{
     display: none;
 }
+
+.flip-h{
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+.summary-box{
+    margin-top:20px;
+    right: 20px;
+    background-color: #DDD;
+    padding:40px 40px;
+    width:100%;
+  //  position: fixed;
+  //  bottom:20px;
+}

@@ -6,9 +6,7 @@ import { ProdentryComponent } from 'src/app/components/prodentry/prodentry.compo
 import { v4 as uuid4} from 'uuid';
 import * as ProdActions from './../../store/products.actions'
 import { map, Observable, reduce } from 'rxjs';
-import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
-import { ThisReceiver } from '@angular/compiler';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -18,7 +16,7 @@ import { ThisReceiver } from '@angular/compiler';
 })
 export class ProductsComponent implements OnInit {
 
-  constructor(private store: Store) { }
+  constructor(private store: Store, private router: Router) { }
 
   products$!: Observable<Product[]>;       //current products saved in list.
   totalbase$!: Observable<number>;
@@ -50,7 +48,14 @@ export class ProductsComponent implements OnInit {
       totalprice: 0.00,
       transient: true
     }
-    this.store.dispatch(ProdActions.addProduct({ product }));
-    //this.newproducts.push(product);
+    this.store.dispatch(ProdActions.addProduct({ product })); 
+  }
+
+  checkout(){
+    // clear out transient entries
+    //this.store.dispatch(ProdActions.clearTransients({ })); 
+    console.log('cheking out');
+    this.store.dispatch(ProdActions.clearTransients()); 
+    this.router.navigate(['/bill']);
   }
 }
