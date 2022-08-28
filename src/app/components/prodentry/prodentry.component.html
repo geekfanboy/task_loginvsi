@@ -1,33 +1,33 @@
-<form [formGroup]="entryForm" class="form-horizontal" id="entryForm">
+<form [formGroup]="entryForm" class="form-horizontal" id="entryForm" (ngSubmit)="saveEntry()">
     <table class="product-table table">
         <tbody>
-            <!--
-    <tr *ngIf="!editMode">
-        <td>{{entry.code}}</td>
-        <td>{{entry.name}}</td>
-        <td>{{entry.baseprice}}</td>
-        <td>{{entry.tax}}</td>
-        <td>{{entry.totalprice}}</td>
-        <td>
-            <button class="btn btn-action btn-link" (click)="editEntry()"><i class="icon icon-edit"></i></button>
-            <button class="btn btn-action btn-link"><i class="icon icon-delete"></i></button>
-        </td>
-    </tr> -->
             <tr [ngClass]="editMode ? 'entry-edit':'entry-read'">
                 <td> <input type="text" formControlName="code" form="entryForm" /></td>
                 <td> <input type="text" formControlName="name" form="entryForm" /></td>
-                <td> <input type="text" formControlName="baseprice" form="entryForm" /></td>
-                <td> <input type="text" formControlName="tax" form="entryForm" /></td>
-                <td> {{ this.entryForm.get('baseprice')?.value * (1+this.entryForm.get('tax')?.value)}} </td>
+                <td>
+                    <div class="input-currency" [ngClass]="{'hasError':(this.entryForm.get('baseprice')?.invalid)}">&#8364;</div>
+                    <input type='number' formControlName="baseprice" form="entryForm" />
+
+                </td>
+
+                <td> 
+                    <input class="input-haspercent"  type="number" formControlName="tax" form="entryForm" /> <div class="input-percent" [ngClass]="{'hasError':(this.entryForm.get('tax')?.invalid)}">&#37;</div></td>
+                
+                <td> 
+                    
+                     <input class="input-total text-right" [disabled]="true" type="text" value="{{(this.entryForm.get('baseprice')?.value * ((100+this.entryForm.get('tax')?.value)/100)) |
+                     currency:'EUR'}}">
+                     </td>
                 <td>
 
-                    <button *ngIf="!editMode" class="btn btn-action btn-link" (click)="editEntry()"><i
+                    <button type="button" *ngIf="!editMode" class="btn btn-action btn-link" (click)="editEntry()"><i
                             class="icon icon-edit"></i></button>
-                    <button *ngIf="!editMode" class="btn btn-action btn-link"><i class="icon icon-delete"></i></button>
-
-                    <button *ngIf="editMode" class="btn btn-action btn-primary" (click)="saveEntry()"><i
+                    <button type="button" *ngIf="!editMode" class="btn btn-action btn-link" (click)="deleteEntry()"><i
+                            class="icon icon-delete"></i></button>
+                    <button type="submit" [disabled]="this.entryForm.invalid" *ngIf="editMode" class="btn btn-action btn-primary" ><i
                             class="icon icon-check"></i></button>
-                    <button *ngIf="editMode" class="btn btn-action" (click)="cancelEdit()"><i class="icon icon-cross"></i></button>
+                    <button type="button" *ngIf="editMode" class="btn btn-action" (click)="cancelEdit()"><i
+                            class="icon icon-cross"></i></button>
                 </td>
             </tr>
         </tbody>

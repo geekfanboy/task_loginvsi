@@ -1,7 +1,16 @@
+
+
 <div class="container">
+    <div class="hero-title">
+        <div>
+          <h1>Products</h1>
+          <p>Product list maker</p>
+        </div>
+      </div>
+    
     <div class="columns">
         <div class="column col-12">
-           
+
             <table class="table product-table">
                 <thead>
                     <tr>
@@ -13,30 +22,28 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                </table>
-           
-        <app-prodentry *ngFor="let prod of products" [entry]="prod"></app-prodentry>
-        <app-prodentry *ngFor="let prod of newproducts" [entry]="prod"></app-prodentry>
-        <button class="btn btn-primary" (click)="newProd()">New Product</button>
-            <!--
-                <div class="form-group">
-                    <input type="text" formControlName="code" />
-                    <input type="text" formControlName="name" />
-                    <input type="text" formControlName="baseprice" />
-                    <input type="text" formControlName="tax" />
-                    <span>{{(this.productForm.get('baseprice')?.value)}}</span>
+            </table>
 
-             
-                </div>
-          -->
+            <app-prodentry *ngFor="let prod of products$ | async" [entry]="prod"></app-prodentry>
+          <!--  <app-prodentry *ngFor="let prod of newproducts" [entry]="prod" [editMode]="true" [isNew]="true"> 
+            </app-prodentry>-->
 
-
-
-           
+            <div>
+                SUBTOTALS (w/o taxes) = {{totalbase$ | async}}
+            </div>
             
-            <button (click)="addItem()">Add Item</button>
+            <div>
+                Total Including tax = {{totaltaxed$ | async}}
+            </div>
+            <div class="my-2">
+                <button class="btn btn-primary btn-lg" (click)="createProd()">  <i class="icon icon-plus"></i> New Product</button>
+            <button class="btn btn-secondary float-right  btn-lg"  [routerLink]="['/bill']">Go to Billing Page 
+
+                <i class="icon icon-arrow-right"></i>
+            </button>    
+            </div>
+            
         </div>
     </div>
 
 </div>
-<button [routerLink]="['/bill']">Go to Billing Page</button>

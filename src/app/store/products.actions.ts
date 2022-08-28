@@ -15,13 +15,13 @@ export const addProduct = createAction(
 
 export const saveProduct = createAction(
     ProductActionTypes.PRD_SAV,
-    props<{ product:Product, index:number }>()
+    props<{ product:Product }>()
 );
 
 
 export const deleteProduct = createAction(
     ProductActionTypes.PRD_DEL,
-    props<{ index:number }>()
+    props<{ id:string }>()
 );
 
 /*

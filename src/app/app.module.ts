@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { productReducer } from './store/products.reducers';
 import { ProdentryComponent } from './components/prodentry/prodentry.component';
+import { CurrencyPipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { ProdentryComponent } from './components/prodentry/prodentry.component';
     ReactiveFormsModule,
     StoreModule.forRoot({product:productReducer})
   ],
-  providers: [],
+  providers: [CurrencyPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

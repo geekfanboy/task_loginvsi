@@ -4,7 +4,8 @@ export interface Product{
     name: string;
     baseprice: number;
     tax: number;
-    totalprice: number
+    totalprice: number,
+    transient: boolean
 }
 
 export const INITPROD:Product = {
@@ -13,5 +14,6 @@ export const INITPROD:Product = {
     name : '',
     baseprice : 0,
     tax : 0.21,
-    totalprice : 0
+    totalprice : 0,
+    transient: true
 }
