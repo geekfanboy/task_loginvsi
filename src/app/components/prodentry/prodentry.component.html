@@ -1,0 +1,35 @@
+<form [formGroup]="entryForm" class="form-horizontal" id="entryForm">
+    <table class="product-table table">
+        <tbody>
+            <!--
+    <tr *ngIf="!editMode">
+        <td>{{entry.code}}</td>
+        <td>{{entry.name}}</td>
+        <td>{{entry.baseprice}}</td>
+        <td>{{entry.tax}}</td>
+        <td>{{entry.totalprice}}</td>
+        <td>
+            <button class="btn btn-action btn-link" (click)="editEntry()"><i class="icon icon-edit"></i></button>
+            <button class="btn btn-action btn-link"><i class="icon icon-delete"></i></button>
+        </td>
+    </tr> -->
+            <tr [ngClass]="editMode ? 'entry-edit':'entry-read'">
+                <td> <input type="text" formControlName="code" form="entryForm" /></td>
+                <td> <input type="text" formControlName="name" form="entryForm" /></td>
+                <td> <input type="text" formControlName="baseprice" form="entryForm" /></td>
+                <td> <input type="text" formControlName="tax" form="entryForm" /></td>
+                <td> {{ this.entryForm.get('baseprice')?.value * (1+this.entryForm.get('tax')?.value)}} </td>
+                <td>
+
+                    <button *ngIf="!editMode" class="btn btn-action btn-link" (click)="editEntry()"><i
+                            class="icon icon-edit"></i></button>
+                    <button *ngIf="!editMode" class="btn btn-action btn-link"><i class="icon icon-delete"></i></button>
+
+                    <button *ngIf="editMode" class="btn btn-action btn-primary" (click)="saveEntry()"><i
+                            class="icon icon-check"></i></button>
+                    <button *ngIf="editMode" class="btn btn-action" (click)="cancelEdit()"><i class="icon icon-cross"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>

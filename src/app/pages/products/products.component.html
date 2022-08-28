@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="columns">
+        <div class="column col-12">
+           
+            <table class="table product-table">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Base Price</th>
+                        <th>Tax</th>
+                        <th>Total Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                </table>
+           
+        <app-prodentry *ngFor="let prod of products" [entry]="prod"></app-prodentry>
+        <app-prodentry *ngFor="let prod of newproducts" [entry]="prod"></app-prodentry>
+        <button class="btn btn-primary" (click)="newProd()">New Product</button>
+            <!--
+                <div class="form-group">
+                    <input type="text" formControlName="code" />
+                    <input type="text" formControlName="name" />
+                    <input type="text" formControlName="baseprice" />
+                    <input type="text" formControlName="tax" />
+                    <span>{{(this.productForm.get('baseprice')?.value)}}</span>
+
+             
+                </div>
+          -->
+
+
+
+           
+            
+            <button (click)="addItem()">Add Item</button>
+        </div>
+    </div>
+
+</div>
+<button [routerLink]="['/bill']">Go to Billing Page</button>
