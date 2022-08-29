@@ -3,10 +3,8 @@
         border-color: rgba(0,0,0,0);
         background: transparent;
         width:100%;
-    }
-   
+    }   
 }
-
 
 .entry-edit{
     input{
@@ -14,13 +12,10 @@
     }
 }
 
-.form-row:hover{
-    background-color: #EEE;
-}
-   
-
 .input-total{
+    border-color: transparent;
+    background-color: #EEE;
+    color: black;
     font-weight: bolder;
-    background-color: transparent;
-    border: none;
+
 }

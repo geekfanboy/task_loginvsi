@@ -22,27 +22,21 @@ export class ProductsComponent implements OnInit {
   totalbase$!: Observable<number>;
   totaltaxed$!: Observable<number>;
 
-  newproducts: Product[] = [];    //new products. transient
+  newproducts: Product[] = [];    
 
   ngOnInit(): void {
 
     this.products$ = this.store.select(fromProd.selectProducts);
     this.totalbase$ = this.products$.pipe( map(prod=> prod.reduce((total,item)=>total + item.baseprice,0)));
     this.totaltaxed$ = this.products$.pipe( map(prod=> prod.reduce((total,item)=>total + item.totalprice,0)));
-
-    //this.totalbase$ = this.store.select(fromProd.selectProducts).map(order => order.reduce((total, price) => total + price, 0)
-    
-    //this.store.select(fromProd.selectProducts).subscribe(products => {
-    //  this.products = products
-    //})
     
     }
 
   createProd(){
     const product:Product ={
-      id: uuid4().toString(),
-      code: Date.now().toString(),
-      name: "New Product",
+      id: uuid4().toString(),   //create unique id for referencing (ideally this should be code but we aren't assured of Code's uniqueness)
+      code: '',
+      name: '',
       baseprice: 0.00,
       tax: 21,
       totalprice: 0.00,
@@ -52,10 +46,8 @@ export class ProductsComponent implements OnInit {
   }
 
   checkout(){
-    // clear out transient entries
-    //this.store.dispatch(ProdActions.clearTransients({ })); 
-    console.log('cheking out');
-    this.store.dispatch(ProdActions.clearTransients()); 
+    
+    this.store.dispatch(ProdActions.clearTransients());  // clear out transient(unsaved) entries 
     this.router.navigate(['/bill']);
   }
 }

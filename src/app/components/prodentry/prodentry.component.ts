@@ -1,5 +1,5 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { INITIAL_STATE, Store } from '@ngrx/store';
 import { INITPROD, Product } from 'src/app/models/products.models';
@@ -10,18 +10,20 @@ import * as ProdActions from 'src/app/store/products.actions';
   templateUrl: './prodentry.component.html',
   styleUrls: ['./prodentry.component.scss']
 })
-export class ProdentryComponent implements OnInit {
+export class ProdentryComponent implements OnInit, AfterViewInit {
 
   constructor(private fb: FormBuilder, private store: Store, private currencyPipe: CurrencyPipe) { }
 
   @Input() entry: Product = INITPROD;
-  editMode: boolean = false;
   @Input() billMode = false;
+  @ViewChild('codeInput') codeInputElem !: ElementRef<HTMLInputElement>;
+  editMode: boolean = false;
+
 
   entryForm: FormGroup = this.fb.group({
-    code: ['xx', Validators.required],
+    code: ['', Validators.required],
     name: ['', Validators.required],
-    baseprice: [0, Validators.required],
+    baseprice: ['', Validators.required],
     tax: [21, Validators.required],
     totalprice: [0, Validators.required]
   })
@@ -29,10 +31,14 @@ export class ProdentryComponent implements OnInit {
 
   ngOnInit(): void {
     this.entryToForm();
-    //this.setFormEnable(this.editMode);
     this.setEditMode(this.entry.transient);
   }
 
+  ngAfterViewInit(){  
+    setTimeout(()=>{  
+      this.codeInputElem.nativeElement.focus();},0);  //set focus to 1st input at creation of init  
+      
+  }
   //copy input entry to form fields
   entryToForm() {
     this.entryForm.get('code')?.setValue(this.entry.code);
@@ -40,8 +46,6 @@ export class ProdentryComponent implements OnInit {
     this.entryForm.get('baseprice')?.setValue(this.entry.baseprice);
     this.entryForm.get('tax')?.setValue(this.entry.tax);
   }
-
-
 
   //set if editable or not
   setEditMode(enable: boolean) {
@@ -64,7 +68,6 @@ export class ProdentryComponent implements OnInit {
 
   // make entry editable
   editEntry() {
-    console.log(this.entry);
     this.setEditMode(true);
   }
 
@@ -87,44 +90,13 @@ export class ProdentryComponent implements OnInit {
       transient: false
     }
 
-    console.log(product);
-
     this.store.dispatch(ProdActions.saveProduct({ product }));
     this.entry = product;
     this.setEditMode(false);
   }
 
   deleteEntry() {
-    console.log('deletemje')
     this.store.dispatch(ProdActions.deleteProduct({ id: this.entry.id }));
-  }
-
-  transformAmount(element: any) {
-    console.log(element)
-    const formattedAmount = this.currencyPipe.transform(this.entryForm.get('baseprice')?.value, '$');
-    console.log(formattedAmount);
-    element.target.value = formattedAmount;
-  }
-
-  onlyNumberKey(event: any) {
-    let charCode = (event.query) ? event.query : event.keyCode;
-    console.log(event)
-    console.log(charCode);
-
-
-    if((charCode > 47 && charCode < 58)){
-      return true;
-    }
-    if(charCode == 44){
-      console.log(event.target.value);
-      if(event.target.value.includes(",")){
-        console.log('her');
-        return false
-      }else{
-        return true;
-      }
-    }
-    return false;
   }
 
 

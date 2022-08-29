@@ -2,22 +2,13 @@
 import { Product } from './../models/products.models';
 import { Action, createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 import * as ProdActions from './products.actions';
-import { ConditionalExpr } from '@angular/compiler';
-import { state } from '@angular/animations';
-import { ProductsComponent } from '../pages/products/products.component';
-import { ContentChild } from '@angular/core';
-
 
 export interface State {
     products: Product[],
-    //basetotal: number,
-    //total: number
 }
 
 export const initialState: State = {
     products: [],
-    //basetotal: 0,
-    // total: 0
 }
 
 const _productReducer = createReducer(
@@ -27,9 +18,6 @@ const _productReducer = createReducer(
     }),
 
     on(ProdActions.saveProduct, (state, { product }) => {
-        //state.products.map(
-        //    (obj, i) => obj.id === product.id ? { product }: obj);
-        //console.log(newProds);
 
         let newProd = state.products.map(
             (content) => {
@@ -46,26 +34,18 @@ const _productReducer = createReducer(
 
     on(ProdActions.deleteProduct, (state, { id }) => {
 
-        console.log(state.products);
-
         const newProds:Product[] = state.products.filter((obj) => {
             return obj.id != id;
         });
-
-        console.log(newProds);
 
         return { ...state, products: newProds }
     }),
 
     on(ProdActions.clearTransients, (state) => {
 
-        console.log(state.products);
-
         const newProds = state.products.filter((obj) => {
             return !obj.transient;
         });
-
-        console.log(newProds);
 
         return { ...state, products: newProds }
     })

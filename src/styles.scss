@@ -1,118 +1,146 @@
-/* You can add global styles to this file, and also import other style files */
 .product-table {
-    td{
+    border: none;
+    border-collapse: collapse;
+
+    td {
         position: relative;
-    }
-    td:nth-of-type(1), th:nth-of-type(1) {
-        width: 15%;    
+        border-left: 1px solid #EEE;
+        border-right: 1px solid #EEE;
+
+        &:nth-of-type(1){ width: 15%; border-left:none }
+        &:nth-of-type(2){ width: 35% }
+        &:nth-of-type(3){ width: 15% }
+        &:nth-of-type(4){ width: 10% }
+        &:nth-of-type(5){ width: 15%; background-color: #EEE; }
+        &:nth-of-type(6){ width: 10% }
+        &:last-child {
+            border-right: none;
+            background-color: #DDD;
+            text-align: center;
+        }
     }
 
-    td:nth-of-type(2), th:nth-of-type(2) {
-        width: 35%;
-    }
-    
-    td:nth-of-type(3), th:nth-of-type(3) {
-        width: 15%;
-    }
-    
-    td:nth-of-type(4), th:nth-of-type(4) {
-        width: 10%;
-    }
-    
-    td:nth-of-type(5), th:nth-of-type(5) {
-        width: 15%;
-    }
-    
-    td:nth-of-type(6), th:nth-of-type(6) {
-        width: 10%;
+    th{
+        text-align: center;
+        background-color: #333;
+        color: white;
+        border-top: 1px solid #111;
+        border-left: 1px solid #222;
+        border-right: 1px solid #666;
+ 
+        &:nth-of-type(1){ width: 15%; border-left: none; }
+        &:nth-of-type(2){ width: 35% }
+        &:nth-of-type(3){ width: 15% }
+        &:nth-of-type(4){ width: 10% }
+        &:nth-of-type(5){ width: 15% }
+        &:nth-of-type(6){ width: 10% }
+        &:last-child { border-right: none }
     }
 }
 
-.input-currency{
+.input-currency {
     position: absolute;
     top: 19px;
     left: 15px;
-    
-    &+input{
-        padding-left:20px;
-    }
-    &.hasError{
-        color:darkred;
+
+    &.hasError {
+        color: darkred;
     }
 }
 
+.input-hascurrency{
+    padding-left:20px;
+}
 
-.input-percent{
+
+.input-percent {
     position: absolute;
     right: 15px;
-    top: 20px;
-    &.hasError{
-        color:darkred;
+    top: 19px;
+
+    &.hasError {
+        color: darkred;
     }
 
 }
 
-.input-haspercent{
+.input-haspercent {
     padding-right: 25px;
     text-align: right;
- 
+
 }
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 /* Firefox */
 input[type=number] {
-  -moz-appearance: textfield;
-  text-align: right;
-//  border:1px solid;
+    -moz-appearance: textfield;
+    text-align: right;
+    //  border:1px solid;
 }
 
 
 
-input{
+input {
     padding: 5px 10px;
+    border: 1px solid #333;
+    outline: none;
 }
 
-input.ng-invalid{ 
-   // border: red;
-   // background-color: rgba(255,0,0,0.05);
+input.ng-invalid.ng-touched {
     color: darkred;
-    box-shadow: 0 0 5px 1px red;
-    &:focus{
-     //   outline-color: red;
+    background-color: rgba(255, 0, 0, 0.1);
+    border-color: darkred;
+
+    &:focus {
+        //   outline-color: red;
     }
 }
 
-.hero-title{
-    padding:20px 50px 8px 50px;
-    margin-top:10px;
+.hero-title {
+    padding: 20px 50px 8px 50px;
+    margin-top: 10px;
     background-color: #333;
     color: white;
-    h1{
+
+    h1 {
         margin-bottom: 0;
     }
 }
 
-[hidden]{
+[hidden] {
     display: none;
 }
 
-.flip-h{
+.flip-h {
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
 }
 
-.summary-box{
-    margin-top:20px;
+.summary-box {
+    margin-top: 20px;
     right: 20px;
     background-color: #DDD;
-    padding:40px 40px;
-    width:100%;
-  //  position: fixed;
-  //  bottom:20px;
+    padding: 40px 40px;
+    width: 100%;
+}
+
+.legend {
+    .btn.btn-link {
+        color: #666;
+
+        i {
+            font-weight: bold;
+        }
+    }
+}
+
+.text-subtle {
+    font-size: 0.8rem;
+    color: #666;
 }

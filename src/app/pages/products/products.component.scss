@@ -1,9 +1,12 @@
-
-
-#table-main{
-    padding-bottom: 300px;
-}
-
 #btn-new{
     width:100%;
+}
+
+.legend{
+    margin-top:20px;
+    align-self: center;
+    .btn:hover{
+        background-color: transparent;
+        cursor: default;
+    }
 }

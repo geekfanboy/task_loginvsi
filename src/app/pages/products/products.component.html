@@ -1,14 +1,10 @@
 <div class="container">
     <div class="hero-title p-sticky">
-        <div>
-            <h1>Products</h1>
-            <p>Product list maker</p>
-        </div>
+        <h1>Edit Product List</h1>
+        <p>Build your list of products</p>
     </div>
-
     <div class="columns">
         <div class="column col-12">
-
             <table class="table product-table">
                 <thead>
                     <tr>
@@ -21,29 +17,41 @@
                     </tr>
                 </thead>
             </table>
-
             <app-prodentry *ngFor="let prod of products$ | async" [entry]="prod"></app-prodentry>
 
             <div class="my-2">
-                <button type="button" class="btn btn-link btn-lg my-2" id="btn-new" (click)="createProd()"> <i class="icon icon-plus"></i> New
-                    Product</button>
-
-                <div  class="float-right text-right p-sticky summary-box">
-
-                    <div>
-                        
-                        <p><strong>Subtotals (w/o taxes) = {{(totalbase$ | async) | currency : 'EUR'}} <br> Total Including tax = {{totaltaxed$ | async | currency: 'EUR'}}</strong></p>
-                    </div>
-                    <p>Please ensure all changes are saved. All unsaved changes will be discarded. <br> 
-                        before going to the Billing Page. </p>
-                    <button id="btn-continue" type="button" class="btn btn-primary float-right btn-lg" (click)="checkout()">Continue
-
-                        <i class="icon icon-arrow-right"></i>
-                    </button>
-                </div>
+                <button type="button" class="btn btn-primary btn-lg my-2" id="btn-new" (click)="createProd()"> <i
+                        class="icon icon-plus"></i> New Product</button>
             </div>
 
+            <div class="summary-box">
+                <div class="columns">
+                    <div class="column col-6">
+                        <div>
+                            <p class="h5">Summary of Saved Items</p>
+                            <p>Subtotals (w/o taxes) : <strong>{{(totalbase$ | async) | currency : 'EUR'}}</strong>
+                                <br><span class="h6"> Total
+                                    Including tax : <strong>{{totaltaxed$ | async | currency: 'EUR'}}</strong></span>
+                            </p>
+                        </div>
+                        <p>Please ensure all changes are saved before going to the Billing Page.
+                            <br><span class="text-error"><strong>All unsaved changes will be discarded.</strong></span>
+                        </p>
+                        <button id="btn-continue" type="button" class="btn btn-primary btn-lg"
+                            (click)="checkout()">Continue <i class="icon icon-arrow-right"></i>
+                        </button>
+                    </div>
+                    <div class="legend column col-6 text-right">
+                        <div class="divider" data-content="BUTTON GUIDE"></div>
+                        <div class="text-subtle"><span>Here is a quick guide on what each button does</span></div>
+                        <button class="btn btn-lg btn-link"><i class="icon icon-edit mx-2"></i> Edit</button> |
+                        <button class="btn btn-lg  btn-link"><i class="icon icon-delete mx-2"></i> Delete</button> |
+                        <button class="btn btn-lg  btn-link"><i class="icon icon-check mx-2"></i> Save</button> |
+                        <button class="btn btn-lg  btn-link"><i class="icon icon-refresh flip-h mx-2"></i> Revert</button> |
+                        <button class="btn btn-lg  btn-link"><i class="icon icon-cross mx-2"></i> Cancel</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
 </div>

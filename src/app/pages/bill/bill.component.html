@@ -1,20 +1,12 @@
 <div class="container">
-    <div class="hero-title p-sticky">
-        
-            <div >
-                <h1>Saved Products</h1>
-                <p>Showing list of Saved Products</p>
-
-            </div>
-        
-        
+    <div class="hero-title p-sticky bg-primary">
+        <div>
+            <h1>Saved Products</h1>
+            <p>Showing list of Saved Products</p>
+        </div>
     </div>
-    
-
-
     <div class="columns">
         <div class="column col-12">
-
             <table class="table product-table">
                 <thead>
                     <tr>
@@ -26,24 +18,25 @@
                     </tr>
                 </thead>
             </table>
-
             <app-prodentry *ngFor="let prod of products$ | async" [entry]="prod" [billMode]="true"></app-prodentry>
-
             <div class="my-2">
-             
-                <div  class="float-right text-right p-sticky summary-box">
+                <div class="p-sticky summary-box">
                     <div>
-                        
-                        <p><strong>Subtotals (w/o taxes) = {{(totalbase$ | async) | currency : 'EUR'}} <br> Total Including tax = {{totaltaxed$ | async | currency: 'EUR'}}</strong></p>
+                        <div>
+                            <p class="h5">Summary of Saved Items</p>
+                            <p>Subtotals (w/o taxes) : <strong>{{(totalbase$ | async) | currency : 'EUR'}}</strong>
+                                <br><span class="h6"> Total
+                                    Including tax : <strong>{{totaltaxed$ | async | currency: 'EUR'}}</strong></span>
+                            </p>
+                        </div>
+                        <p>Click the button below to return to editing
+                        </p>
                     </div>
-                    <button type="button" id="btn-back" class="btn btn-error float-right  btn-lg" (click)="back()"><i class="icon icon-arrow-left"></i> Back to Editing
-
-                        
+                    <button type="button" id="btn-back" class="btn btn-error  btn-lg" (click)="back()"><i
+                            class="icon icon-arrow-left"></i> Back to Editing
                     </button>
                 </div>
             </div>
-
         </div>
     </div>
-
 </div>

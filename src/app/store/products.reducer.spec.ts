@@ -14,7 +14,7 @@ describe('productReducer', () => {
         });
     });
     describe('new item added state should change', () => {
-        it('should return the default state', () => {
+        it('state should change', () => {
             const { initialState } = fromReducer;
             const product: Product = {
                 id: '3434546',
@@ -31,7 +31,7 @@ describe('productReducer', () => {
             expect(state).not.toBe(initialState);
         });
     });
-    describe('new item added then deleteed. state should revert', () => {
+    describe('new item added then deleted. state should revert', () => {
         it('should return the default state', () => {
             const { initialState } = fromReducer;
             const product: Product = {
@@ -54,7 +54,7 @@ describe('productReducer', () => {
         });
     });
     describe('purge should remove transient items from store', () => {
-        it('should return the default state', () => {
+        it('should remove all transients', () => {
             const { initialState } = fromReducer;
             const product: Product = {
                 id: '3434546',
@@ -77,7 +77,7 @@ describe('productReducer', () => {
         
     });
     describe('purge should NOT remove transient=false items from store', () => {
-        it('should return the default state', () => {
+        it('should keep saved changes', () => {
             const { initialState } = fromReducer;
             const product: Product = {
                 id: '3434546',
