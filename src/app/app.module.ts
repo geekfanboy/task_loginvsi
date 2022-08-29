@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { BillComponent } from './pages/bill/bill.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { productReducer } from './store/products.reducers';
 import { ProdentryComponent } from './components/prodentry/prodentry.component';
@@ -22,7 +22,7 @@ import { CurrencyPipe } from '@angular/common';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({product:productReducer})
+    StoreModule.forRoot({products:productReducer})
   ],
   providers: [CurrencyPipe],
   bootstrap: [AppComponent]

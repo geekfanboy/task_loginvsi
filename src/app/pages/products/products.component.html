@@ -25,7 +25,7 @@
             <app-prodentry *ngFor="let prod of products$ | async" [entry]="prod"></app-prodentry>
 
             <div class="my-2">
-                <button type="button" class="btn btn-link btn-lg my-2" id="button-new" (click)="createProd()"> <i class="icon icon-plus"></i> New
+                <button type="button" class="btn btn-link btn-lg my-2" id="btn-new" (click)="createProd()"> <i class="icon icon-plus"></i> New
                     Product</button>
 
                 <div  class="float-right text-right p-sticky summary-box">
@@ -36,7 +36,7 @@
                     </div>
                     <p>Please ensure all changes are saved. All unsaved changes will be discarded. <br> 
                         before going to the Billing Page. </p>
-                    <button type="button" class="btn btn-primary float-right  btn-lg" (click)="checkout()">Continue
+                    <button id="btn-continue" type="button" class="btn btn-primary float-right btn-lg" (click)="checkout()">Continue
 
                         <i class="icon icon-arrow-right"></i>
                     </button>

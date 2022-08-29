@@ -36,7 +36,7 @@
                         
                         <p><strong>Subtotals (w/o taxes) = {{(totalbase$ | async) | currency : 'EUR'}} <br> Total Including tax = {{totaltaxed$ | async | currency: 'EUR'}}</strong></p>
                     </div>
-                    <button type="button" class="btn btn-error float-right  btn-lg" [routerLink]="['/products']"><i class="icon icon-arrow-left"></i> Back to Editing
+                    <button type="button" id="btn-back" class="btn btn-error float-right  btn-lg" (click)="back()"><i class="icon icon-arrow-left"></i> Back to Editing
 
                         
                     </button>

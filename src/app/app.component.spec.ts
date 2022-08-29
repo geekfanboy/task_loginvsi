@@ -23,13 +23,7 @@ describe('AppComponent', () => {
   it(`should have as title 'task_loginvsi'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('task_loginvsi');
+    expect(app.title).toEqual('Task LoginVSI');
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('task_loginvsi app is running!');
-  });
 });

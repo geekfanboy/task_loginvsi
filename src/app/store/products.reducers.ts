@@ -48,7 +48,7 @@ const _productReducer = createReducer(
 
         console.log(state.products);
 
-        const newProds = state.products.filter((obj) => {
+        const newProds:Product[] = state.products.filter((obj) => {
             return obj.id != id;
         });
 
@@ -79,5 +79,6 @@ export function productReducer(state: State | undefined, action: Action) {
     return _productReducer(state, action);
 };
 
-export const selectProdState = createFeatureSelector<State>('product');
+export const selectProdState = createFeatureSelector<State>('products');
+export const selectProdFullState = createSelector(selectProdState, res => res);
 export const selectProducts = createSelector(selectProdState, res => res.products);
